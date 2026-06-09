@@ -2,22 +2,73 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Remarket 未來市場 - 購物車介面最終版</title>
-    <!-- 引入 A-Frame 框架 -->
+    <title>Remarket 未來市場 - 網頁原生購物車最終版</title>
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    
+    <style>
+      #web-cart-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 9999; /* 確保永遠在最上層，不被3D場景遮擋 */
+        background-color: #d11141;
+        color: white;
+        border: none;
+        padding: 15px 25px;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      #web-cart-btn:hover {
+        background-color: #a80d32;
+        transform: scale(1.05);
+      }
+      #web-cart-btn:active {
+        transform: scale(0.95);
+      }
+    </style>
+
     <script>
       // 全局購物車資料庫陣列
       window.marketCart = [];
 
-      // 更新畫面上購物車按鈕數量的函數
+      // 更新畫面上購物車按鈕數量的函數（直接操作網頁 HTML）
       function updateCartButtonVisual() {
-        let cartBtn = document.querySelector('#cart-btn-plane');
-        if (cartBtn) {
-          cartBtn.setAttribute('canvas-text', `text: [ 🛒 檢視購物車 (${window.marketCart.length}) ]; color: #ffffff; bgColor: #d11141`);
+        let cartCountEl = document.querySelector('#cart-count');
+        if (cartCountEl) {
+          cartCountEl.innerText = window.marketCart.length;
         }
       }
 
-      // 點擊商品加入購物車的中文互動腳本
+      // 開啟購物車明細的函數
+      function showCartDetails() {
+        if (window.marketCart.length === 0) {
+          alert("🛒 您的未來市場購物車目前是空的喔！\n\n快去市場走走，點擊桌上的在地新鮮食材吧！");
+          return;
+        }
+
+        let listText = "📋 【Remarket 未來市場 - 您的選購清單】\n--------------------------------------------\n";
+        let totalSum = 0;
+        
+        window.marketCart.forEach((item, index) => {
+          listText += `${index + 1}. ${item.name} ----- NT$ ${item.priceText}\n`;
+          totalSum += item.priceVal;
+        });
+
+        listText += `--------------------------------------------\n`;
+        listText += `💰 目前透明價格預計總計：NT$ ${totalSum} 元\n\n`;
+        listText += `💡 溫馨提醒：線上購物模擬完成！\n請保存此畫面或憑手機截圖，於實體市場營業時間內至各別攤位「實體取貨與付款」，用行動支持在地傳統人情味！`;
+
+        alert(listText);
+      }
+
+      // 點擊 3D 商品加入購物車的互動腳本
       AFRAME.registerComponent('shop-item', {
         init: function () {
           let el = this.el;
@@ -31,7 +82,7 @@
             let itemName = el.getAttribute('data-name');
             let itemPriceStr = el.getAttribute('data-price');
             
-            // 提取價格中的數字以計算總金額（例如 "60 / 顆" 提取出 60）
+            // 提取價格中的數字以計算總金額
             let priceNum = parseInt(itemPriceStr.replace(/[^0-9]/g, '')) || 0;
 
             // 將商品推入購物車陣列
@@ -41,49 +92,15 @@
               priceVal: priceNum
             });
 
-            // 更新右上角購物車按鈕文字
+            // 即時更新右下角網頁購物車按鈕文字
             updateCartButtonVisual();
 
-            alert(`🛒 已成功加入購物車！\n\n【${itemName}】\n💰 透明價格：NT$ ${itemPriceStr}\n\n💡 提示：您可以點擊右上角購物車查看所有已選購的清單與總金額喔！`);
+            alert(`🛒 已成功加入購物車！\n\n【${itemName}】\n💰 透明價格：NT$ ${itemPriceStr}\n\n💡 提示：您可以點擊右下角懸浮按鈕查看所有已選購的清單與總金額喔！`);
           });
         }
       });
 
-      // 點擊右上角購物車按鈕查看清單的互動腳本
-      AFRAME.registerComponent('cart-viewer', {
-        init: function () {
-          let el = this.el;
-          el.addEventListener('mouseenter', function () {
-            el.setAttribute('animation__btn', 'property: scale; to: 1.1 1.1 1.1; dur: 100');
-          });
-          el.addEventListener('mouseleave', function () {
-            el.setAttribute('animation__btn', 'property: scale; to: 1 1 1; dur: 100');
-          });
-          el.addEventListener('click', function () {
-            if (window.marketCart.length === 0) {
-              alert("🛒 您的未來市場購物車目前是空的喔！\n\n快去市場走走，點擊桌上的在地新鮮食材吧！");
-              return;
-            }
-
-            // 串接購物車清單字串
-            let listText = "📋 【Remarket 未來市場 - 您的選購清單】\n--------------------------------------------\n";
-            let totalSum = 0;
-            
-            window.marketCart.forEach((item, index) => {
-              listText += `${index + 1}. ${item.name} ----- NT$ ${item.priceText}\n`;
-              totalSum += item.priceVal;
-            });
-
-            listText += `--------------------------------------------\n`;
-            listText += `💰 目前透明價格預計總計：NT$ ${totalSum} 元\n\n`;
-            listText += `💡 溫馨提醒：線上購物模擬完成！\n請保存此畫面或憑手機截圖，於實體市場營業時間內至各別攤位「實體取貨與付款」，用行動支持在地傳統人情味！`;
-
-            alert(listText);
-          });
-        }
-      });
-
-      // HTML Canvas 2D 紋理貼圖技術
+      // HTML Canvas 2D 紋理貼圖技術（用於攤位招牌與二十四節氣海報）
       AFRAME.registerComponent('canvas-text', {
         schema: {
           text: {type: 'string', default: ''},
@@ -94,18 +111,8 @@
         },
         init: function () {
           let data = this.data;
-          this.canvas = document.createElement('canvas');
-          this.ctx = this.canvas.getContext('2d');
-          this.renderText();
-        },
-        update: function () {
-          // 當屬性（例如文字或數量）改變時重新渲染
-          this.renderText();
-        },
-        renderText: function () {
-          let data = this.data;
-          let canvas = this.canvas;
-          let ctx = this.ctx;
+          let canvas = document.createElement('canvas');
+          let ctx = canvas.getContext('2d');
           
           if (data.isPoster) {
             canvas.width = 512;
@@ -133,7 +140,6 @@
               ctx.fillText(lines[i], 30, 60 + (i * 45));
             }
           } else {
-            // 用於普通攤位名牌或購物車按鈕
             canvas.width = 512;
             canvas.height = 128;
             ctx.fillStyle = data.bgColor;
@@ -171,9 +177,13 @@
     </script>
   </head>
   <body>
+
+    <button id="web-cart-btn" onclick="showCartDetails()">
+      🛒 檢視購物車 (<span id="cart-count">0</span>)
+    </button>
+
     <a-scene fog="type: linear; color: #fceade; near: 15; far: 45" cursor="rayOrigin: mouse" raycaster="objects: .clickable">
       
-      <!-- 預先載入圖片（精密對接你的 6 位老闆與 6 大真實相片商品檔案） -->
       <a-assets>
         <img id="owner1" src="owner1.png.png" crossorigin="anonymous">
         <img id="owner2" src="owner2.png.png" crossorigin="anonymous">
@@ -190,18 +200,13 @@
         <img id="item6" src="item6.png" crossorigin="anonymous">
       </a-assets>
 
-      <!-- 天空與地面 -->
       <a-sky color="#fcd9c5"></a-sky>
       <a-plane position="0 0 0" rotation="-90 0 0" width="100" height="100" color="#8c857b" roughness="0.9"></a-plane>
       <a-plane position="0 0.01 -10" rotation="-90 0 0" width="5" height="40" color="#9e978d" roughness="0.8"></a-plane>
 
-      <!-- 暖色光源 -->
       <a-light type="ambient" color="#fff1d6" intensity="1.3"></a-light>
       <a-light type="directional" color="#ffb373" intensity="0.5" position="-2 4 1"></a-light>
 
-      <!-- ==================== 傳統市場街道 ==================== -->
-
-      <!-- 【攤位 1：阿蓮鮮蔬果】 -->
       <a-entity position="-4 0 -4" rotation="0 15 0">
         <a-box position="0 0.4 0" width="3.2" height="0.8" depth="2" color="#7a6f66" roughness="0.9"></a-box>
         <a-box position="0 0.85 0" width="3" height="0.1" depth="1.8" color="#b59670"></a-box>
@@ -210,7 +215,6 @@
         <a-box position="1 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffffff" rotation="5 0 0"></a-box>
         <a-sphere position="0 2.1 0" radius="0.15" color="#ffaa00" material="emissive: #ffaa00; emissiveIntensity: 2"></a-sphere>
         
-        <!-- 🥬 真實相片商品：大湖高麗菜立牌 -->
         <a-image src="#item1" position="0 0.98 0.2" rotation="0 15 0" width="0.45" height="0.45" class="clickable" data-name="大湖高麗菜" data-price="60 元" shop-item material="transparent: true; alphaTest: 0.5"></a-image>
         
         <a-plane position="0 1.25 0.95" width="2.4" height="0.6" canvas-text="text: 1. 阿蓮鮮蔬果\n高麗菜 $60/顆 ｜ 番茄 $80/斤; color: #ffffff; bgColor: #4a2f13"></a-plane>
@@ -221,7 +225,6 @@
       </a-entity>
 
 
-      <!-- 【攤位 2：阿宏黑豬肉專賣店】 -->
       <a-entity position="4 0 -4" rotation="0 -15 0">
         <a-box position="0 0.4 0" width="3.2" height="0.8" depth="2" color="#666b5c" roughness="0.9"></a-box>
         <a-box position="0 0.85 0" width="3" height="0.1" depth="1.8" color="#c7a781"></a-box>
@@ -231,111 +234,9 @@
         <a-cylinder position="-0.6 1.4 0.4" radius="0.02" height="1.0" color="#444444"></a-cylinder>
         <a-sphere position="-0.6 0.95 0.4" radius="0.15" color="#ff3333" material="emissive: #ff1111; emissiveIntensity: 2"></a-sphere>
         
-        <!-- 🥩 真實相片商品：台灣溫體黑豬肉五花立牌 -->
         <a-image src="#item2" position="0.1 0.98 0.3" rotation="10 30 0" width="0.55" height="0.4" class="clickable" data-name="台灣溫體豬五花" data-price="160 元" shop-item material="transparent: true; alphaTest: 0.5"></a-image>
         
         <a-plane position="0 1.25 0.95" width="2.4" height="0.6" canvas-text="text: 2. 阿宏黑豬肉\n本地黑豬肉五花：$160/斤; color: #ffffff; bgColor: #2d4a13"></a-plane>
         <a-plane position="1.62 1.3 -0.3" rotation="0 -90 0" width="1.2" height="1.5" color="#fffef0" canvas-text="text: 【二十四節氣 - 大寒】\n\n一年中最冷之時，為進補\n好時機！適合搭配排骨、\n老薑與麻油燉煮薑母熱湯，\n驅寒溫補、活絡氣血。; color: #8b0000; bgColor: #fffef0; isPoster: true"></a-plane>
         
         <a-image src="#owner2" position="0 1.4 -0.3" width="1.4" height="1.4" material="transparent: true; alphaTest: 0.3"></a-image>
-        <a-plane position="0 2.15 -0.3" width="1.8" height="0.7" canvas-text="text: 阿宏老闆：「正港黑豬肉啦！\n環境乾淨免煩惱，\n要切哪一塊回去滷？」; isNpc: true"></a-plane>
-      </a-entity>
-
-
-      <!-- 【攤位 3：阿港伯現撈海鮮】 -->
-      <a-entity position="-4 0 -10">
-        <a-box position="0 0.4 0" width="3.2" height="0.8" depth="2" color="#5c6666" roughness="0.9"></a-box>
-        <a-box position="0 0.85 0" width="2.8" height="0.15" depth="1.6" color="#3a7bc8"></a-box>
-        <a-box position="0 3.3 0" width="3.4" height="0.1" depth="2.2" color="#3366ff" rotation="5 0 0"></a-box>
-        <a-box position="-0.7 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffffff" rotation="5 0 0"></a-box>
-        <a-box position="0.7 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffffff" rotation="5 0 0"></a-box>
-        
-        <!-- 🦐 真實相片商品：現撈大白蝦立牌 -->
-        <a-image src="#item3" position="0 0.98 0.2" rotation="20 45 0" width="0.5" height="0.5" class="clickable" data-name="現撈大白蝦" data-price="250 元" shop-item material="transparent: true; alphaTest: 0.5"></a-image>
-        
-        <a-plane position="0 1.25 0.95" width="2.4" height="0.6" canvas-text="text: 3. 阿港伯現撈海鮮\n現撈大白蝦：$250/斤; color: #ffffff; bgColor: #1a3a5f"></a-plane>
-        <a-plane position="-1.62 1.3 -0.3" rotation="0 90 0" width="1.2" height="1.5" color="#fffef0" canvas-text="text: 【二十四節氣 - 秋分】\n\n此時正值蟹肥魚美，\n不過海鮮食材多性寒，\n料理時記得加入老薑與蔥，\n溫胃散寒，吃得更安心。; color: #8b0000; bgColor: #fffef0; isPoster: true"></a-plane>
-        
-        <a-image src="#owner3" position="0 1.4 -0.3" width="1.4" height="1.4" material="transparent: true; alphaTest: 0.3"></a-image>
-        <a-plane position="0 2.15 -0.3" width="1.8" height="0.7" canvas-text="text: 阿港伯：「現撈的看這邊！\n有青才敢大聲！\n每隻都活蹦亂跳喔！」; isNpc: true"></a-plane>
-      </a-entity>
-
-
-      <!-- 【攤位 4：傳承手作豆腐攤】 -->
-      <a-entity position="4 0 -10">
-        <a-box position="0 0.4 0" width="3.2" height="0.8" depth="2" color="#73706c" roughness="0.9"></a-box>
-        <a-box position="0 0.85 0" width="2.8" height="0.1" depth="1.6" color="#d6ceb8"></a-box>
-        <a-box position="0 3.3 0" width="3.4" height="0.1" depth="2.2" color="#ffbb33" rotation="5 0 0"></a-box>
-        <a-box position="-0.6 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffffff" rotation="5 0 0"></a-box>
-        <a-box position="0.6 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffffff" rotation="5 0 0"></a-box>
-        
-        <!-- ⬜ 真實相片商品：手工板豆腐立牌 -->
-        <a-image src="#item4" position="0 0.98 0.2" rotation="0 15 0" width="0.45" height="0.45" class="clickable" data-name="傳統板豆腐" data-price="20 元" shop-item material="transparent: true; alphaTest: 0.5"></a-image>
-        
-        <a-plane position="0 1.25 0.95" width="2.4" height="0.6" canvas-text="text: 4. 傳承手工豆腐攤\n傳統板豆腐：$20/塊; color: #ffffff; bgColor: #5c4a38"></a-plane>
-        <a-plane position="1.62 1.3 -0.3" rotation="0 -90 0" width="1.2" height="1.5" color="#fffef0" canvas-text="text: 【二十四節氣 - 夏至】\n\n夏日氣候炎熱悶濕，\n適合用板豆腐搭配涼瓜、\n大骨一同慢火燉湯，\n可以清熱解毒、消暑退火。; color: #8b0000; bgColor: #fffef0; isPoster: true"></a-plane>
-        
-        <a-image src="#owner4" position="0 1.4 -0.3" width="1.4" height="1.4" material="transparent: true; alphaTest: 0.3"></a-image>
-        <a-plane position="0 2.15 -0.3" width="1.8" height="0.7" canvas-text="text: 豆腐西施：「正宗手工磨的！\n古法黃豆做出來很有豆香，\n回去煎煮炒都很嫩！」; isNpc: true"></a-plane>
-      </a-entity>
-
-
-      <!-- 【攤位 5：金利五金鍋具行】 -->
-      <a-entity position="-4 0 -16">
-        <a-box position="0 0.4 0" width="3.2" height="0.8" depth="2" color="#525252" roughness="0.9"></a-box>
-        <a-box position="0 3.3 0" width="3.4" height="0.1" depth="2.2" color="#444444" rotation="5 0 0"></a-box>
-        <a-box position="-0.5 3.31 0" width="0.3" height="0.12" depth="2.22" color="#888888" rotation="5 0 0"></a-box>
-        <a-box position="0.5 3.31 0" width="0.3" height="0.12" depth="2.22" color="#888888" rotation="5 0 0"></a-box>
-        
-        <!-- 🍳 真實相片商品：台式大炒鍋立牌 -->
-        <a-image src="#item5" position="0 1.05 0.2" rotation="-10 20 0" width="0.55" height="0.55" class="clickable" data-name="台式傳統鑄鐵炒鍋" data-price="550 元" shop-item material="transparent: true; alphaTest: 0.5"></a-image>
-        
-        <a-plane position="0 1.25 0.95" width="2.4" height="0.6" canvas-text="text: 5. 金利五金鍋具行\n純鑄鐵大炒鍋：$550/支; color: #ffffff; bgColor: #2b2b2b"></a-plane>
-        <a-plane position="-1.62 1.3 -0.3" rotation="0 90 0" width="1.2" height="1.5" color="#fffef0" canvas-text="text: 【 Remarket 廚房智慧】\n\n好鍋配時令好食！\n傳統黑鐵鍋大火爆炒，\n最能緊緊鎖住當季蔬菜的\n原汁原味與天然營養。; color: #8b0000; bgColor: #fffef0; isPoster: true"></a-plane>
-        
-        <a-image src="#owner5" position="0 1.4 -0.3" width="1.4" height="1.4" material="transparent: true; alphaTest: 0.3"></a-image>
-        <a-plane position="0 2.15 -0.3" width="1.8" height="0.7" canvas-text="text: 張伯：「這支大鐵鍋可以用\n三十年啦！大火爆炒，\n炒菜保證有鑊氣！」; isNpc: true"></a-plane>
-      </a-entity>
-
-
-      <!-- 【攤位 6：美美流行服飾】 -->
-      <a-entity position="4 0 -16">
-        <a-box position="0 0.4 0" width="3.2" height="0.8" depth="2" color="#6e5766" roughness="0.9"></a-box>
-        <a-box position="0 3.3 0" width="3.4" height="0.1" depth="2.2" color="#cc4499" rotation="5 0 0"></a-box>
-        <a-box position="-0.6 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffb3e6" rotation="5 0 0"></a-box>
-        <a-box position="0.6 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffb3e6" rotation="5 0 0"></a-box>
-        
-        <!-- 🎽 真實相片商品：時尚工作圍裙立牌 -->
-        <a-image src="#item6" position="0 1.15 0.2" rotation="0 -15 0" width="0.45" height="0.6" class="clickable" data-name="阿嬤同款時尚圍裙" data-price="190 元" shop-item material="transparent: true; alphaTest: 0.5; side: double"></a-image>
-        
-        <a-plane position="0 1.25 0.95" width="2.4" height="0.6" canvas-text="text: 6. 美美流行服飾\n時尚工作圍裙：$190/件; color: #ffffff; bgColor: #4a1535"></a-plane>
-        <a-plane position="1.62 1.3 -0.3" rotation="0 -90 0" width="1.2" height="1.5" color="#fffef0" canvas-text="text: 【二十四節氣 - 立冬】\n\n冬季自此開始。氣溫驟降\n，市場服飾攤貼心備有\n純棉保暖衛生衣與防風外套\n，提醒您記得幫長輩禦寒。」; color: #8b0000; bgColor: #fffef0; isPoster: true"></a-plane>
-        
-        <a-image src="#owner6" position="0 1.4 -0.3" width="1.4" height="1.4" material="transparent: true; alphaTest: 0.3"></a-image>
-        <a-plane position="0 2.15 -0.3" width="1.8" height="0.7" canvas-text="text: 美美姐：「帥哥美女來看喔！\n外銷日本的純棉花襯衫跟\n工作圍裙特價，防油好洗！」; isNpc: true"></a-plane>
-      </a-entity>
-
-
-      <!-- ==================== 🛠️ 玩家攝影機與全新懸浮購物車 UI 系統 ==================== -->
-      <a-entity id="rig" position="0 0 2">
-        <a-camera look-controls wasd-controls="acceleration: 25">
-          <!-- 核心雷射指標，用於點擊桌面和 UI -->
-          <a-cursor visible="false" raycaster="objects: .clickable"></a-cursor>
-          
-          <!-- 🛒 懸浮 HUD 購物車介面：綁定在 Camera 上，永遠固定在畫面右上角 -->
-          <a-entity position="0.55 0.35 -1" rotation="0 0 0">
-            <a-plane id="cart-btn-plane"
-                     class="clickable"
-                     width="0.38" 
-                     height="0.08" 
-                     canvas-text="text: [ 🛒 檢視購物車 (0) ]; color: #ffffff; bgColor: #d11141"
-                     cart-viewer>
-            </a-plane>
-          </a-entity>
-          
-        </a-camera>
-      </a-entity>
-
-    </a-scene>
-  </body>
-</html>
