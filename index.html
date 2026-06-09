@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Remarket 未來市場 - 走道大圖最終完美版</title>
+    <title>Remarket 未來市場 - 走道商品導覽立牌版</title>
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     
     <style>
@@ -239,7 +239,7 @@
       <a-light type="directional" color="#ffb373" intensity="0.5" position="-2 4 1"></a-light>
 
 
-      <a-entity position="-1.9 0.02 -5.5" rotation="0 45 0">
+      <a-entity position="-1.9 0 -5.5" rotation="0 45 0">
         <a-box position="0 0.25 0" width="0.4" height="0.5" depth="0.2" color="#0055a5"></a-box>
         <a-box position="0 0.25 0.01" width="0.4" height="0.15" depth="0.2" color="#e74c3c"></a-box>
         <a-box position="0 0.1 0.02" width="0.4" height="0.1" depth="0.2" color="#2ecc71"></a-box>
@@ -248,7 +248,7 @@
         <a-box position="0.2 0.2 -0.09" width="0.3" height="0.1" depth="0.15" color="#e74c3c" rotation="0 -20 10"></a-box>
       </a-entity>
 
-      <a-entity position="1.9 0.02 -11.5" rotation="0 -40 0">
+      <a-entity position="1.9 0 -11.5" rotation="0 -40 0">
         <a-box position="0 0.05 0" width="0.5" height="0.05" depth="0.8" color="#7f8c8d"></a-box>
         <a-cylinder position="-0.22 0.4 -0.35" radius="0.015" height="0.8" color="#95a5a6" rotation="15 0 0"></a-cylinder>
         <a-cylinder position="0.22 0.4 -0.35" radius="0.015" height="0.8" color="#95a5a6" rotation="15 0 0"></a-cylinder>
@@ -258,7 +258,7 @@
         <a-box position="0 0.22 0.1" width="0.42" height="0.3" depth="0.5" color="#ca9e6a" roughness="1"></a-box>
       </a-entity>
 
-      <a-entity position="0 0.02 -18" rotation="0 0 0">
+      <a-entity position="0 0 -18" rotation="0 0 0">
         <a-box position="0 0.35 0" width="1.2" height="0.06" depth="0.3" color="#5c4033" roughness="0.9"></a-box>
         <a-box position="-0.5 0.17 0.1" width="0.05" height="0.34" depth="0.05" color="#4a3226"></a-box>
         <a-box position="0.5 0.17 0.1" width="0.05" height="0.34" depth="0.05" color="#4a3226"></a-box>
@@ -266,10 +266,134 @@
         <a-box position="0.5 0.17 -0.1" width="0.05" height="0.34" depth="0.05" color="#4a3226"></a-box>
       </a-entity>
 
-      <a-image src="#item1" position="-1.8 0.5 -4" rotation="0 65 0" width="0.75" height="0.75" class="clickable" data-name="大湖高麗菜" data-price="60 元" shop-item="id: stall1" material="transparent: true; alphaTest: 0.5"
-               animation="property: rotation; to: 0 75 0; from: 0 55 0; dir: alternate; dur: 2000; loop: true; easing: easeInOutQuad"></a-image>
 
-      <a-image src="#item2" position="1.8 0.5 -4" rotation="0 -65 0" width="0.85" height="0.6" class="clickable" data-name="台灣溫體豬五花" data-price="160 元" shop-item="id: stall2" material="transparent: true; alphaTest: 0.5"
-               animation="property: rotation; to: 0 -55 0; from: 0 -75 0; dir: alternate; dur: 2200; loop: true; easing: easeInOutQuad"></a-image>
+      <a-entity position="-4 0 -4" rotation="0 15 0">
+        <a-box position="0 0.4 0" width="3.2" height="0.8" depth="2" color="#7a6f66" roughness="0.9"></a-box>
+        <a-box position="0 0.85 0" width="3" height="0.1" depth="1.8" color="#b59670"></a-box>
+        <a-box position="0 3.3 0" width="3.4" height="0.1" depth="2.2" color="#ff4d4d" rotation="5 0 0"></a-box>
+        <a-box position="-1 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffffff" rotation="5 0 0"></a-box>
+        <a-box position="1 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffffff" rotation="5 0 0"></a-box>
+        <a-sphere position="0 2.1 0" radius="0.15" color="#ffaa00" material="emissive: #ffaa00; emissiveIntensity: 2"></a-sphere>
+        
+        <a-image src="#item1" position="0 0.98 0.2" rotation="0 15 0" width="0.45" height="0.45" class="clickable" data-name="大湖高麗菜" data-price="60 元" shop-item="id: stall1" material="transparent: true; alphaTest: 0.5"></a-image>
+        <a-plane id="btn-txt-stall1" position="0 1.05 0.55" width="0.6" height="0.2" class="clickable" data-name="大湖高麗菜" data-price="60 元" shop-item="id: stall1" canvas-text="text: ➕ 加入購物車; color: #ffffff; bgColor: #e67e22; isBtn: true"></a-plane>
+        
+        <a-plane position="0 1.25 0.95" width="2.4" height="0.6" canvas-text="text: 1. 阿蓮鮮蔬果\n高麗菜 $60/顆 ｜ 番茄 $80/斤; color: #ffffff; bgColor: #4a2f13"></a-plane>
+        <a-plane position="-1.62 1.3 -0.3" rotation="0 90 0" width="1.2" height="1.5" color="#fffef0" canvas-text="text: 【二十四節氣 - 立春】\n\n春屬木，此時宜吃韭菜、\n豆芽與辛甘發散之物，\n有助益於脾胃陽氣升發，\n順應天時照顧肝臟健康。; color: #8b0000; bgColor: #fffef0; isPoster: true"></a-plane>
+        <a-image src="#owner1" position="0 1.4 -0.3" width="1.4" height="1.4" material="transparent: true; alphaTest: 0.3"></a-image>
+        <a-plane position="0 2.15 -0.3" width="1.8" height="0.7" canvas-text="text: 阿蓮姨：「少年仔！\n今那日的高麗菜透早剛到\n，現採的真甜喔！」; isNpc: true"></a-plane>
 
-      <a-image src="#item3" position="-1.8 0.5 -10" rotation
+        <a-image src="#item1" position="1.9 0.5 0" rotation="0 -75 0" width="0.75" height="0.75" class="clickable" data-name="大湖高麗菜" data-price="60 元" shop-item="id: stall1" material="transparent: true; alphaTest: 0.5"
+                 animation="property: rotation; to: 0 -65 0; from: 0 -85 0; dir: alternate; dur: 2000; loop: true; easing: easeInOutQuad"></a-image>
+      </a-entity>
+
+
+      <a-entity position="4 0 -4" rotation="0 -15 0">
+        <a-box position="0 0.4 0" width="3.2" height="0.8" depth="2" color="#666b5c" roughness="0.9"></a-box>
+        <a-box position="0 0.85 0" width="3" height="0.1" depth="1.8" color="#c7a781"></a-box>
+        <a-box position="0 3.3 0" width="3.4" height="0.1" depth="2.2" color="#ff4d4d" rotation="5 0 0"></a-box>
+        <a-box position="-0.5 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffffff" rotation="5 0 0"></a-box>
+        <a-box position="0.5 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffffff" rotation="5 0 0"></a-box>
+        <a-cylinder position="-0.6 1.4 0.4" radius="0.02" height="1.0" color="#444444"></a-cylinder>
+        <a-sphere position="-0.6 0.95 0.4" radius="0.15" color="#ff3333" material="emissive: #ff1111; emissiveIntensity: 2"></a-sphere>
+        
+        <a-image src="#item2" position="0.1 0.98 0.3" rotation="10 30 0" width="0.55" height="0.4" class="clickable" data-name="台灣溫體豬五花" data-price="160 元" shop-item="id: stall2" material="transparent: true; alphaTest: 0.5"></a-image>
+        <a-plane id="btn-txt-stall2" position="0.1 1.05 0.65" width="0.6" height="0.2" class="clickable" data-name="台灣溫體豬五花" data-price="160 元" shop-item="id: stall2" canvas-text="text: ➕ 加入購物車; color: #ffffff; bgColor: #e67e22; isBtn: true"></a-plane>
+        
+        <a-plane position="0 1.25 0.95" width="2.4" height="0.6" canvas-text="text: 2. 阿宏黑豬肉\n本地黑豬肉五花：$160/斤; color: #ffffff; bgColor: #2d4a13"></a-plane>
+        <a-plane position="1.62 1.3 -0.3" rotation="0 -90 0" width="1.2" height="1.5" color="#fffef0" canvas-text="text: 【二十四節氣 - 大寒】\n\n一年中最冷之時，為進補\n好時機！適合搭配排骨、\n老薑與麻油燉煮薑母熱湯，\n驅寒溫補、活絡氣血。; color: #8b0000; bgColor: #fffef0; isPoster: true"></a-plane>
+        <a-image src="#owner2" position="0 1.4 -0.3" width="1.4" height="1.4" material="transparent: true; alphaTest: 0.3"></a-image>
+        <a-plane position="0 2.15 -0.3" width="1.8" height="0.7" canvas-text="text: 阿宏老闆：「正港黑豬肉啦！\n環境乾淨免煩惱，\n要切哪一塊回去滷？」; isNpc: true"></a-plane>
+
+        <a-image src="#item2" position="-1.9 0.5 0" rotation="0 75 0" width="0.85" height="0.6" class="clickable" data-name="台灣溫體豬五花" data-price="160 元" shop-item="id: stall2" material="transparent: true; alphaTest: 0.5"
+                 animation="property: rotation; to: 0 85 0; from: 0 65 0; dir: alternate; dur: 2200; loop: true; easing: easeInOutQuad"></a-image>
+      </a-entity>
+
+
+      <a-entity position="-4 0 -10">
+        <a-box position="0 0.4 0" width="3.2" height="0.8" depth="2" color="#5c6666" roughness="0.9"></a-box>
+        <a-box position="0 0.85 0" width="2.8" height="0.15" depth="1.6" color="#3a7bc8"></a-box>
+        <a-box position="0 3.3 0" width="3.4" height="0.1" depth="2.2" color="#3366ff" rotation="5 0 0"></a-box>
+        <a-box position="-0.7 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffffff" rotation="5 0 0"></a-box>
+        <a-box position="0.7 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffffff" rotation="5 0 0"></a-box>
+        
+        <a-image src="#item3" position="0 0.98 0.2" rotation="20 45 0" width="0.5" height="0.5" class="clickable" data-name="現撈大白蝦" data-price="250 元" shop-item="id: stall3" material="transparent: true; alphaTest: 0.5"></a-image>
+        <a-plane id="btn-txt-stall3" position="0 1.05 0.55" width="0.6" height="0.2" class="clickable" data-name="現撈大白蝦" data-price="250 元" shop-item="id: stall3" canvas-text="text: ➕ 加入購物車; color: #ffffff; bgColor: #e67e22; isBtn: true"></a-plane>
+        
+        <a-plane position="0 1.25 0.95" width="2.4" height="0.6" canvas-text="text: 3. 阿港伯現撈海鮮\n現撈大白蝦：$250/斤; color: #ffffff; bgColor: #1a3a5f"></a-plane>
+        <a-plane position="-1.62 1.3 -0.3" rotation="0 90 0" width="1.2" height="1.5" color="#fffef0" canvas-text="text: 【二十四節氣 - 秋分】\n\n此時正值蟹肥魚美，\n不過海鮮食材多性寒，\n料理時記得加入老薑與蔥，\n溫胃散寒，吃得更安心。; color: #8b0000; bgColor: #fffef0; isPoster: true"></a-plane>
+        <a-image src="#owner3" position="0 1.4 -0.3" width="1.4" height="1.4" material="transparent: true; alphaTest: 0.3"></a-image>
+        <a-plane position="0 2.15 -0.3" width="1.8" height="0.7" canvas-text="text: 阿港伯：「現撈的看這邊！\n有青才敢大聲！\n每隻都活蹦亂跳喔！」; isNpc: true"></a-plane>
+
+        <a-image src="#item3" position="1.75 0.5 0" rotation="10 -90 0" width="0.75" height="0.75" class="clickable" data-name="現撈大白蝦" data-price="250 元" shop-item="id: stall3" material="transparent: true; alphaTest: 0.5"
+                 animation="property: rotation; to: 10 -80 0; from: 10 -100 0; dir: alternate; dur: 1800; loop: true; easing: easeInOutQuad"></a-image>
+      </a-entity>
+
+
+      <a-entity position="4 0 -10">
+        <a-box position="0 0.4 0" width="3.2" height="0.8" depth="2" color="#73706c" roughness="0.9"></a-box>
+        <a-box position="0 0.85 0" width="2.8" height="0.1" depth="1.6" color="#d6ceb8"></a-box>
+        <a-box position="0 3.3 0" width="3.4" height="0.1" depth="2.2" color="#ffbb33" rotation="5 0 0"></a-box>
+        <a-box position="-0.6 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffffff" rotation="5 0 0"></a-box>
+        <a-box position="0.6 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffffff" rotation="5 0 0"></a-box>
+        
+        <a-image src="#item4" position="0 0.98 0.2" rotation="0 15 0" width="0.45" height="0.45" class="clickable" data-name="傳統板豆腐" data-price="20 元" shop-item="id: stall4" material="transparent: true; alphaTest: 0.5"></a-image>
+        <a-plane id="btn-txt-stall4" position="0 1.05 0.55" width="0.6" height="0.2" class="clickable" data-name="傳統板豆腐" data-price="20 元" shop-item="id: stall4" canvas-text="text: ➕ 加入購物車; color: #ffffff; bgColor: #e67e22; isBtn: true"></a-plane>
+        
+        <a-plane position="0 1.25 0.95" width="2.4" height="0.6" canvas-text="text: 4. 傳承手工豆腐攤\n傳統板豆腐：$20/塊; color: #ffffff; bgColor: #5c4a38"></a-plane>
+        <a-plane position="1.62 1.3 -0.3" rotation="0 -90 0" width="1.2" height="1.5" color="#fffef0" canvas-text="text: 【二十四節氣 - 夏至】\n\n夏日氣候炎熱悶濕，\n適合用板豆腐搭配涼瓜、\n大骨一同慢火燉湯，\n可以清熱解毒、消暑退火。; color: #8b0000; bgColor: #fffef0; isPoster: true"></a-plane>
+        <a-image src="#owner4" position="0 1.4 -0.3" width="1.4" height="1.4" material="transparent: true; alphaTest: 0.3"></a-image>
+        <a-plane position="0 2.15 -0.3" width="1.8" height="0.7" canvas-text="text: 豆腐西施：「正宗手工磨的！\n古法黃豆做出來很有豆香，\n回去煎煮炒都很嫩！」; isNpc: true"></a-plane>
+
+        <a-image src="#item4" position="-1.75 0.5 0" rotation="0 90 0" width="0.75" height="0.75" class="clickable" data-name="傳統板豆腐" data-price="20 元" shop-item="id: stall4" material="transparent: true; alphaTest: 0.5"
+                 animation="property: rotation; to: 0 100 0; from: 0 80 0; dir: alternate; dur: 2100; loop: true; easing: easeInOutQuad"></a-image>
+      </a-entity>
+
+
+      <a-entity position="-4 0 -16">
+        <a-box position="0 0.4 0" width="3.2" height="0.8" depth="2" color="#525252" roughness="0.9"></a-box>
+        <a-box position="0 3.3 0" width="3.4" height="0.1" depth="2.2" color="#444444" rotation="5 0 0"></a-box>
+        <a-box position="-0.5 3.31 0" width="0.3" height="0.12" depth="2.22" color="#888888" rotation="5 0 0"></a-box>
+        <a-box position="0.5 3.31 0" width="0.3" height="0.12" depth="2.22" color="#888888" rotation="5 0 0"></a-box>
+        
+        <a-image src="#item5" position="0 1.05 0.2" rotation="-10 20 0" width="0.55" height="0.55" class="clickable" data-name="台式傳統鑄鐵炒鍋" data-price="550 元" shop-item="id: stall5" material="transparent: true; alphaTest: 0.5"></a-image>
+        <a-plane id="btn-txt-stall5" position="0 1.05 0.55" width="0.6" height="0.2" class="clickable" data-name="台式傳統鑄鐵炒鍋" data-price="550 元" shop-item="id: stall5" canvas-text="text: ➕ 加入購物車; color: #ffffff; bgColor: #e67e22; isBtn: true"></a-plane>
+        
+        <a-plane position="0 1.25 0.95" width="2.4" height="0.6" canvas-text="text: 5. 金利五金鍋具行\n純鑄鐵大炒鍋：$550/支; color: #ffffff; bgColor: #2b2b2b"></a-plane>
+        <a-plane position="-1.62 1.3 -0.3" rotation="0 90 0" width="1.2" height="1.5" color="#fffef0" canvas-text="text: 【 Remarket 廚房智慧】\n\n好鍋配時令好食！\n傳統黑鐵鍋大火爆炒，\n最能緊緊鎖住當季蔬菜的\n原汁原味與天然營養。; color: #8b0000; bgColor: #fffef0; isPoster: true"></a-plane>
+        <a-image src="#owner5" position="0 1.4 -0.3" width="1.4" height="1.4" material="transparent: true; alphaTest: 0.3"></a-image>
+        <a-plane position="0 2.15 -0.3" width="1.8" height="0.7" canvas-text="text: 張伯：「這支大鐵鍋可以用\n三十年啦！大火爆炒，\n炒菜保證有鑊氣！」; isNpc: true"></a-plane>
+
+        <a-image src="#item5" position="1.75 0.5 0" rotation="-10 -90 0" width="0.8" height="0.8" class="clickable" data-name="台式傳統鑄鐵炒鍋" data-price="550 元" shop-item="id: stall5" material="transparent: true; alphaTest: 0.5"
+                 animation="property: rotation; to: -10 -80 0; from: -10 -100 0; dir: alternate; dur: 1900; loop: true; easing: easeInOutQuad"></a-image>
+      </a-entity>
+
+
+      <a-entity position="4 0 -16">
+        <a-box position="0 0.4 0" width="3.2" height="0.8" depth="2" color="#6e5766" roughness="0.9"></a-box>
+        <a-box position="0 3.3 0" width="3.4" height="0.1" depth="2.2" color="#cc4499" rotation="5 0 0"></a-box>
+        <a-box position="-0.6 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffb3e6" rotation="5 0 0"></a-box>
+        <a-box position="0.6 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffb3e6" rotation="5 0 0"></a-box>
+        
+        <a-image src="#item6" position="0 1.15 0.2" rotation="0 -15 0" width="0.45" height="0.6" class="clickable" data-name="阿嬤同款時尚圍裙" data-price="190 元" shop-item="id: stall6" material="transparent: true; alphaTest: 0.5; side: double"></a-image>
+        <a-plane id="btn-txt-stall6" position="0 1.05 0.55" width="0.6" height="0.2" class="clickable" data-name="阿嬤同款時尚圍裙" data-price="190 元" shop-item="id: stall6" canvas-text="text: ➕ 加入購物車; color: #ffffff; bgColor: #e67e22; isBtn: true"></a-plane>
+        
+        <a-plane position="0 1.25 0.95" width="2.4" height="0.6" canvas-text="text: 6. 美美流行服飾\n時尚工作圍裙：$190/件; color: #ffffff; bgColor: #4a1535"></a-plane>
+        <a-plane position="1.62 1.3 -0.3" rotation="0 -90 0" width="1.2" height="1.5" color="#fffef0" canvas-text="text: 【二十四節氣 - 立冬】\n\n冬季自此開始。氣溫驟降\n，市場服飾攤貼心備有\n純棉保暖衛生衣與防風外套\n，提醒您記得幫長輩禦寒。」; color: #8b0000; bgColor: #fffef0; isPoster: true"></a-plane>
+        <a-image src="#owner6" position="0 1.4 -0.3" width="1.4" height="1.4" material="transparent: true; alphaTest: 0.3"></a-image>
+        <a-plane position="0 2.15 -0.3" width="1.8" height="0.7" canvas-text="text: 美美姐：「帥哥美女來看喔！\n外銷日本的純棉花襯衫跟\n工作圍裙特價，防油好洗！」; isNpc: true"></a-plane>
+
+        <a-image src="#item6" position="-1.75 0.5 0" rotation="0 90 0" width="0.6" height="0.8" class="clickable" data-name="阿嬤同款時尚圍裙" data-price="190 元" shop-item="id: stall6" material="transparent: true; alphaTest: 0.5; side: double"
+                 animation="property: rotation; to: 0 105 0; from: 0 75 0; dir: alternate; dur: 2300; loop: true; easing: easeInOutQuad"></a-image>
+      </a-entity>
+
+
+      <a-entity id="rig" position="0 0 2">
+        <a-camera look-controls wasd-controls="acceleration: 25">
+          <a-cursor visible="false" raycaster="objects: .clickable"></a-cursor>
+        </a-camera>
+      </a-entity>
+
+    </a-scene>
+  </body>
+</html>
