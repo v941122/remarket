@@ -2,8 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Remarket 未來市場 - 挑高無穿模完全體</title>
-    <!-- 引入 A-Frame 框架 -->
+    <title>Remarket 未來市場 - 全商品實體化最終版</title>
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script>
       // 點擊購物功能的中文互動腳本
@@ -97,7 +96,6 @@
   <body>
     <a-scene fog="type: linear; color: #fceade; near: 15; far: 45" cursor="rayOrigin: mouse" raycaster="objects: .clickable">
       
-      <!-- 預先載入圖片（精準對接你的 ownerX.png.png 檔名） -->
       <a-assets>
         <img id="owner1" src="owner1.png.png" crossorigin="anonymous">
         <img id="owner2" src="owner2.png.png" crossorigin="anonymous">
@@ -105,20 +103,22 @@
         <img id="owner4" src="owner4.png.png" crossorigin="anonymous">
         <img id="owner5" src="owner5.png.png" crossorigin="anonymous">
         <img id="owner6" src="owner6.png.png" crossorigin="anonymous">
+        
+        <img id="tex-cabbage" src="https://img.icons8.com/illustrations/cartoon/512/cabbage.png" crossorigin="anonymous">
+        <img id="tex-meat" src="https://image.spreadshirtmedia.net/image-server/v1/designs/1029288252,width=178,height=178,productTypeId=648,productColorId=367/a-sliced-raw-pork-steak-png.webp" crossorigin="anonymous">
+        <img id="tex-shrimp" src="https://img.icons8.com/illustrations/cartoon/512/shrimp.png" crossorigin="anonymous">
+        <img id="tex-tofu" src="https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?q=80&w=200&auto=format&fit=crop" crossorigin="anonymous">
+        <img id="tex-wok" src="https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=200&auto=format&fit=crop" crossorigin="anonymous">
+        <img id="tex-apron" src="https://images.unsplash.com/photo-1603252109303-2751441dd157?q=80&w=200&auto=format&fit=crop" crossorigin="anonymous">
       </a-assets>
 
-      <!-- 天空與地面 -->
       <a-sky color="#fcd9c5"></a-sky>
       <a-plane position="0 0 0" rotation="-90 0 0" width="100" height="100" color="#8c857b" roughness="0.9"></a-plane>
       <a-plane position="0 0.01 -10" rotation="-90 0 0" width="5" height="40" color="#9e978d" roughness="0.8"></a-plane>
 
-      <!-- 暖色光源 -->
       <a-light type="ambient" color="#fff1d6" intensity="1.3"></a-light>
       <a-light type="directional" color="#ffb373" intensity="0.5" position="-2 4 1"></a-light>
 
-      <!-- ==================== 傳統市場街道 (六大攤位一字不漏完整版) ==================== -->
-
-      <!-- 【攤位 1：阿蓮鮮蔬果】 -->
       <a-entity position="-4 0 -4" rotation="0 15 0">
         <a-box position="0 0.4 0" width="3.2" height="0.8" depth="2" color="#7a6f66" roughness="0.9"></a-box>
         <a-box position="0 0.85 0" width="3" height="0.1" depth="1.8" color="#b59670"></a-box>
@@ -127,11 +127,9 @@
         <a-box position="1 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffffff" rotation="5 0 0"></a-box>
         <a-sphere position="0 2.1 0" radius="0.15" color="#ffaa00" material="emissive: #ffaa00; emissiveIntensity: 2"></a-sphere>
         
-        <a-entity position="-0.6 1.0 0.2" class="clickable" data-name="大湖高麗菜" data-price="60 / 顆" shop-item>
-          <a-sphere radius="0.25" color="#4dad4d"></a-sphere>
-        </a-entity>
-        <a-entity position="0.6 1.0 0.2" class="clickable" data-name="有機大番茄" data-price="80 / 斤" shop-item>
-          <a-sphere radius="0.15" color="#ff3333"></a-sphere>
+        <a-entity position="0 1.0 0.2" rotation="0 45 10" class="clickable" data-name="大湖高麗菜" data-price="60 / 顆" shop-item>
+          <a-sphere radius="0.25" material="src: #tex-cabbage; roughness: 0.6;"></a-sphere>
+          <a-sphere radius="0.22" position="0.05 0.05 0" material="src: #tex-cabbage; roughness: 0.6;" rotation="0 90 0"></a-sphere>
         </a-entity>
         
         <a-plane position="0 1.25 0.95" width="2.4" height="0.6" canvas-text="text: 1. 阿蓮鮮蔬果\n高麗菜 $60/顆 ｜ 番茄 $80/斤; color: #ffffff; bgColor: #4a2f13"></a-plane>
@@ -142,7 +140,6 @@
       </a-entity>
 
 
-      <!-- 【攤位 2：阿宏黑豬肉專賣店】 -->
       <a-entity position="4 0 -4" rotation="0 -15 0">
         <a-box position="0 0.4 0" width="3.2" height="0.8" depth="2" color="#666b5c" roughness="0.9"></a-box>
         <a-box position="0 0.85 0" width="3" height="0.1" depth="1.8" color="#c7a781"></a-box>
@@ -152,7 +149,9 @@
         <a-cylinder position="-0.6 1.4 0.4" radius="0.02" height="1.0" color="#444444"></a-cylinder>
         <a-sphere position="-0.6 0.95 0.4" radius="0.15" color="#ff3333" material="emissive: #ff1111; emissiveIntensity: 2"></a-sphere>
         
-        <a-box position="0.2 1.0 0.2" width="0.2" height="0.3" depth="0.2" color="#db6e6e" class="clickable" data-name="台灣溫體豬五花" data-price="160 / 斤" shop-item></a-box>
+        <a-entity id="black-pork" position="0.1 0.95 0.3" rotation="0 30 -5" scale="0.8 0.4 1" class="clickable" data-name="台灣溫體豬五花" data-price="160 / 斤" shop-item>
+          <a-torus-knot radius="0.2" radius-tubular="0.08" p="1" q="2" material="src: #tex-meat; roughness: 0.2; emissive: #900; emissiveIntensity: 0.3;"></a-torus-knot>
+        </a-entity>
         
         <a-plane position="0 1.25 0.95" width="2.4" height="0.6" canvas-text="text: 2. 阿宏黑豬肉\n本地黑豬肉五花：$160/斤; color: #ffffff; bgColor: #2d4a13"></a-plane>
         <a-plane position="1.62 1.3 -0.3" rotation="0 -90 0" width="1.2" height="1.5" color="#fffef0" canvas-text="text: 【二十四節氣 - 大寒】\n\n一年中最冷之時，為進補\n好時機！適合搭配排骨、\n老薑與麻油燉煮薑母熱湯，\n驅寒溫補、活絡氣血。; color: #8b0000; bgColor: #fffef0; isPoster: true"></a-plane>
@@ -162,7 +161,6 @@
       </a-entity>
 
 
-      <!-- 【攤位 3：阿港伯現撈海鮮】 -->
       <a-entity position="-4 0 -10">
         <a-box position="0 0.4 0" width="3.2" height="0.8" depth="2" color="#5c6666" roughness="0.9"></a-box>
         <a-box position="0 0.85 0" width="2.8" height="0.15" depth="1.6" color="#3a7bc8"></a-box>
@@ -170,19 +168,18 @@
         <a-box position="-0.7 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffffff" rotation="5 0 0"></a-box>
         <a-box position="0.7 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffffff" rotation="5 0 0"></a-box>
         
-        <a-box position="0 0.95 0.2" width="1.2" height="0.1" depth="0.8" color="#e0f0ff" class="clickable" data-name="現撈大白蝦" data-price="250 / 斤" shop-item>
-          <a-sphere position="0 0.05 0" radius="0.1" color="#ff7f50"></a-sphere>
-        </a-box>
+        <a-entity position="0 0.95 0.2" rotation="30 45 0" class="clickable" data-name="現撈大白蝦" data-price="250 / 斤" shop-item>
+          <a-cylinder radius="0.22" height="0.08" rotation="90 0 0" material="src: #tex-shrimp; transparent: true;"></a-cylinder>
+          <a-cylinder radius="0.16" height="0.09" position="0.1 0.1 0" rotation="90 30 0" material="src: #tex-shrimp; transparent: true;"></a-cylinder>
+        </a-entity>
         
         <a-plane position="0 1.25 0.95" width="2.4" height="0.6" canvas-text="text: 3. 阿港伯現撈海鮮\n現撈大白蝦：$250/斤; color: #ffffff; bgColor: #1a3a5f"></a-plane>
         <a-plane position="-1.62 1.3 -0.3" rotation="0 90 0" width="1.2" height="1.5" color="#fffef0" canvas-text="text: 【二十四節氣 - 秋分】\n\n此時正值蟹肥魚美，\n不過海鮮食材多性寒，\n料理時記得加入老薑與蔥，\n溫胃散寒，吃得更安心。; color: #8b0000; bgColor: #fffef0; isPoster: true"></a-plane>
         
         <a-image src="#owner3" position="0 1.4 -0.3" width="1.4" height="1.4" material="transparent: true; alphaTest: 0.3"></a-image>
-        <a-plane position="0 2.15 -0.3" width="1.8" height="0.7" canvas-text="text: 阿港伯：「現撈的看這邊！\n有青才敢大聲！\n每隻都活蹦亂跳喔！」; isNpc: true"></a-plane>
-      </a-entity>
+        <a-plane position="0 2.15 -0.3" width="1.8" height="0.7" canvas-text="text: 阿港伯：「現撈的看這邊！\n有青才敢大聲！\n每隻都活蹦亂跳喔！」; isNpc: true"></a-entity>
 
 
-      <!-- 【攤位 4：傳承手作豆腐攤】 -->
       <a-entity position="4 0 -10">
         <a-box position="0 0.4 0" width="3.2" height="0.8" depth="2" color="#73706c" roughness="0.9"></a-box>
         <a-box position="0 0.85 0" width="2.8" height="0.1" depth="1.6" color="#d6ceb8"></a-box>
@@ -190,24 +187,25 @@
         <a-box position="-0.6 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffffff" rotation="5 0 0"></a-box>
         <a-box position="0.6 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffffff" rotation="5 0 0"></a-box>
         
-        <a-box position="0 0.95 0.2" width="0.6" height="0.15" depth="0.5" color="#ffffff" class="clickable" data-name="傳統板豆腐" data-price="20 / 塊" shop-item></a-box>
+        <a-box position="0 1.0 0.2" width="0.6" height="0.18" depth="0.5" rotation="0 15 0" class="clickable" data-name="傳統板豆腐" data-price="20 / 塊" shop-item material="src: #tex-tofu; roughness: 0.8; color: #fffff2"></a-box>
         
         <a-plane position="0 1.25 0.95" width="2.4" height="0.6" canvas-text="text: 4. 傳承手工豆腐攤\n傳統板豆腐：$20/塊; color: #ffffff; bgColor: #5c4a38"></a-plane>
-        <a-plane position="1.62 1.3 -0.3" rotation="0 -90 0" width="1.2" height="1.5" color="#fffef0" canvas-text="text: 【二十四節氣 - 夏至】\n\n夏日氣候炎熱悶濕，\n適合用板豆腐搭配涼瓜、\n大骨一同慢火燉湯，\n可以清熱解毒、消暑退火。; color: #8b0000; bgColor: #fffef0; isPoster: true"></a-plane>
+        <a-plane position="1.62 1.3 -0.3" rotation="0 -90 0" width="1.2" height="1.5" color="#fffef0" canvas-text="text: 【二十過節氣 - 夏至】\n\n夏日氣候炎熱悶濕，\n適合用板豆腐搭配涼瓜、\n大骨一同慢火燉湯，\n可以清熱解毒、消暑退火。; color: #8b0000; bgColor: #fffef0; isPoster: true"></a-plane>
         
         <a-image src="#owner4" position="0 1.4 -0.3" width="1.4" height="1.4" material="transparent: true; alphaTest: 0.3"></a-image>
         <a-plane position="0 2.15 -0.3" width="1.8" height="0.7" canvas-text="text: 豆腐西施：「正宗手工磨的！\n古法黃豆做出來很有豆香，\n回去煎煮炒都很嫩！」; isNpc: true"></a-plane>
       </a-entity>
 
 
-      <!-- 【攤位 5：金利五金鍋具行】 -->
       <a-entity position="-4 0 -16">
         <a-box position="0 0.4 0" width="3.2" height="0.8" depth="2" color="#525252" roughness="0.9"></a-box>
         <a-box position="0 3.3 0" width="3.4" height="0.1" depth="2.2" color="#444444" rotation="5 0 0"></a-box>
         <a-box position="-0.5 3.31 0" width="0.3" height="0.12" depth="2.22" color="#888888" rotation="5 0 0"></a-box>
         <a-box position="0.5 3.31 0" width="0.3" height="0.12" depth="2.22" color="#888888" rotation="5 0 0"></a-box>
         
-        <a-cylinder position="0 1.0 0.2" radius="0.35" height="0.08" color="#1a1a1a" class="clickable" data-name="台式傳統鑄鐵炒鍋" data-price="550 / 支" shop-item></a-cylinder>
+        <a-entity position="0 1.0 0.2" rotation="-10 20 0" class="clickable" data-name="台式傳統鑄鐵炒鍋" data-price="550 / 支" shop-item>
+          <a-cylinder radius="0.35" height="0.05" material="src: #tex-wok; roughness: 0.5; metalness: 0.6"></a-cylinder>
+          <a-cylinder radius="0.02" height="0.3" position="0 0 -0.4" rotation="90 0 0" color="#222222"></a-cylinder> </a-entity>
         
         <a-plane position="0 1.25 0.95" width="2.4" height="0.6" canvas-text="text: 5. 金利五金鍋具行\n純鑄鐵大炒鍋：$550/支; color: #ffffff; bgColor: #2b2b2b"></a-plane>
         <a-plane position="-1.62 1.3 -0.3" rotation="0 90 0" width="1.2" height="1.5" color="#fffef0" canvas-text="text: 【 Remarket 廚房智慧】\n\n好鍋配時令好食！\n傳統黑鐵鍋大火爆炒，\n最能緊緊鎖住當季蔬菜的\n原汁原味與天然營養。; color: #8b0000; bgColor: #fffef0; isPoster: true"></a-plane>
@@ -217,24 +215,22 @@
       </a-entity>
 
 
-      <!-- 【攤位 6：美美流行服飾】 -->
       <a-entity position="4 0 -16">
         <a-box position="0 0.4 0" width="3.2" height="0.8" depth="2" color="#6e5766" roughness="0.9"></a-box>
         <a-box position="0 3.3 0" width="3.4" height="0.1" depth="2.2" color="#cc4499" rotation="5 0 0"></a-box>
         <a-box position="-0.6 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffb3e6" rotation="5 0 0"></a-box>
         <a-box position="0.6 3.31 0" width="0.3" height="0.12" depth="2.22" color="#ffb3e6" rotation="5 0 0"></a-box>
         
-        <a-box position="0 1.1 0.2" width="0.1" height="0.5" depth="0.4" color="#ff33aa" class="clickable" data-name="阿嬤同款時尚圍裙" data-price="190 / 件" shop-item></a-box>
+        <a-plane position="0 1.15 0.2" width="0.35" height="0.6" rotation="0 -15 0" class="clickable" data-name="阿嬤同款時尚圍裙" data-price="190 / 件" shop-item material="src: #tex-apron; transparent: true; side: double"></a-plane>
         
-        <a-plane position="0 1.25 0.95" width="2.4" height="0.6" canvas-text="text: 6. 美美流行服飾\n時尚工作圍裙：$190/件; color: #ffffff; bgColor: #4a1535"></a-plane>
+        <a-plane position="0 1.25 0.95" width="2.4" height="0.6" canvas-text="text: 6.美美流行服飾\n時尚工作圍裙：$190/件; color: #ffffff; bgColor: #4a1535"></a-plane>
         <a-plane position="1.62 1.3 -0.3" rotation="0 -90 0" width="1.2" height="1.5" color="#fffef0" canvas-text="text: 【二十四節氣 - 立冬】\n\n冬季自此開始。氣溫驟降\n，市場服飾攤貼心備有\n純棉保暖衛生衣與防風外套\n，提醒您記得幫長輩禦寒。; color: #8b0000; bgColor: #fffef0; isPoster: true"></a-plane>
         
         <a-image src="#owner6" position="0 1.4 -0.3" width="1.4" height="1.4" material="transparent: true; alphaTest: 0.3"></a-image>
-        <a-plane position="0 2.15 -0.3" width="1.8" height="0.7" canvas-text="text:美美姐：「帥哥美女來看喔！\n外銷日本的純棉花襯衫跟\n工作圍裙特價，防油好洗！」; isNpc: true"></a-plane>
+        <a-plane position="0 2.15 -0.3" width="1.8" height="0.7" canvas-text="text: 美美姐：「帥哥美女來看喔！\n外銷日本的純棉花襯衫跟\n工作圍裙特價，防油好洗！」; isNpc: true"></a-plane>
       </a-entity>
 
 
-      <!-- ==================== 玩家攝影機與控制系統 ==================== -->
       <a-entity id="rig" position="0 0 2">
         <a-camera look-controls wasd-controls="acceleration: 25">
           <a-cursor visible="false" raycaster="objects: .clickable"></a-cursor>
