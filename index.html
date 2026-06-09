@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Remarket 未來市場 - 台灣味元宇宙</title>
+    <!-- 引入 A-Frame 框架，支援手機、電腦與 VR 互動 -->
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script>
+      // 點擊購物功能的簡易互動腳本
+      AFRAME.registerComponent('shop-item', {
+        init: function () {
+          let el = this.el;
+          el.addEventListener('click', function () {
+            let itemName = el.getAttribute('data-name');
+            let itemPrice = el.getAttribute('data-price');
+            alert(`🛒 已加入購物車：【${itemName}】\n💰 透明價格：NT$ ${itemPrice}\n\n💡 溫馨提醒：線上購買完成！請於實體市場營業時間內，憑手機畫面至該攤位「實體取貨」，支持在地小商販！`);
+          });
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <!-- 充滿人情味的黃昏市場溫暖光線與霧氣 -->
+    <a-scene fog="type: linear; color: #fceade; near: 10; far: 40" cursor="rayOrigin: mouse">
+      
+      <!-- 1. 天空與環境音效氛圍（溫暖的黃昏市場感） -->
+      <a-sky color="#fcd9c5"></a-sky>
+      <!-- 傳統市場經典的磨石子瓷磚地面 -->
+      <a-plane position="0 0 0" rotation="-90 0 0" width="60" height="60" color="#a39e93" roughness="0.8"></a-plane>
+
+      <!-- 2. 環境光源（黃色鎢絲燈與日光燈混合的台灣味） -->
+      <a-light type="ambient" color="#fff3db" intensity="1.2"></a-light>
+      <a-light type="directional" color="#ffaa66" intensity="0.6" position="-1 2 1"></a-light>
+
+      <!-- ==================== 傳統市場街道架構 ==================== -->
+      <!-- 中央市場走道（玩家在中間走，兩旁是六大攤位） -->
+      
+      <!-- 【攤位 1：阿蓮鮮蔬果】(左側 1) -->
+      <a-entity position="-4 0 -4">
+        <!-- 攤位基座與紅黃條紋遮雨棚 -->
+        <a-box position="0 0.5 0" width="3" height="1" depth="2" color="#d1c7bd"></a-box>
+        <a-cone position="0 2.5 0" radius-bottom="2" radius-top="0.5" height="0.5" color="#ff3333" segments-radial="4" rotation="0 45 0"></a-cone> 
+        <!-- 傳統黃色燈泡 -->
+        <a-sphere position="0 2 0" radius="0.15" color="#ffaa00" material="emissive: #ffaa00; emissiveIntensity: 2"></a-sphere>
+        <!-- 透明價格商品 -->
+        <a-box data-name="大湖高麗菜" data-price="60 / 顆" shop-item position="-0.8 1.1 0.3" width="0.5" height="0.4" depth="0.5" color="#55aa55" class="clickable"></a-box>
+        <a-box data-name="有機大番茄" data-price="80 / 斤" shop-item position="0.5 1.1 0.3" width="0.5" height="0.4" depth="0.5" color="#ff3333" class="clickable"></a-box>
+        <!-- 價格與NPC標籤 -->
+        <a-text value="1. 阿蓮鮮蔬果\n高麗菜: $60/顆\n番茄: $80/斤\n(點擊商品可購買)" position="-1.2 1.6 0.8" color="#000000" scale="0.6 0.6 0.6" font="https://cdn.aframe.io/fonts/NotoSans-Regular.json" shader="msdf"></a-text>
+        <!-- 24節氣知識海報 -->
+        <a-plane position="-1.5 1.5 -1" rotation="0 90 0" width="1.5" height="2" color="#fffaf0">
+          <a-text value="【立春食補】\n此時宜吃韭菜、豆芽\n與辛甘發散之物\n助益脾胃陽氣升發" position="-0.7 0.5 0.01" color="#8b0000" scale="0.4 0.4 0.4"></a-text>
+        </a-plane>
+        <!-- NPC 老闆娘 -->
+        <a-cylinder position="0 1 -0.5" radius="0.3" height="1.2" color="#ff88aa"></a-cylinder>
+        <a-text value="NPC 阿蓮姨:\n「少年仔！今那日的高麗菜\n透早剛到，真甜喔！」" position="-1 2.2 -0.5" color="#d11141" scale="0.5 0.5 0.5"></a-text>
+      </a-entity>
+
+
+      <!-- 【攤位 2：黑豬肉專賣店】(右側 1) -->
+      <a-entity position="4 0 -4">
+        <a-box position="0 0.5 0" width="3" height="1" depth="2" color="#cbd1bd"></a-box>
+        <a-cone position="0 2.5 0" radius-bottom="2" radius-top="0.5" height="0.5" color="#ff3333" segments-radial="4" rotation="0 45 0"></a-cone>
+        <a-sphere position="0 2 0" radius="0.15" color="#ff2200" material="emissive: #ff2200; emissiveIntensity: 2"></a-sphere>
+        <!-- 商品 -->
+        <a-box data-name="台灣溫體豬五花" data-price="160 / 斤" shop-item position="-0.5 1.1 0.3" width="0.6" height="0.3" depth="0.6" color="#ff9999" class="clickable"></a-box>
+        <!-- 看板與NPC -->
+        <a-text value="2. 阿宏黑豬肉\n本地五花肉: $160/斤\n價格透明不灌水！" position="-1.2 1.6 0.8" color="#000000" scale="0.6 0.6 0.6"></a-text>
+        <a-plane position="1.5 1.5 -1" rotation="0 -90 0" width="1.5" height="2" color="#fffaf0">
+          <a-text value="【大寒食補】\n進補好時機！\n適合搭配排骨燉薑母\n驅寒溫補、活絡氣血" position="-0.7 0.5 0.01" color="#8b0000" scale="0.4 0.4 0.4"></a-text>
+        </a-plane>
+        <a-cylinder position="0 1 -0.5" radius="0.35" height="1.4" color="#555555"></a-cylinder>
+        <a-text value="NPC 阿宏老闆:\n「現宰黑豬肉啦！\n要切一塊回去滷嗎？」" position="-1 2.4 -0.5" color="#d11141" scale="0.5 0.5 0.5"></a-text>
+      </a-entity>
+
+
+      <!-- 【攤位 3：阿港伯現撈海鮮】(左側 2) -->
+      <a-entity position="-4 0 -9">
+        <a-box position="0 0.5 0" width="3" height="1" depth="2" color="#b3c7c7"></a-box>
+        <a-cone position="0 2.5 0" radius-bottom="2" radius-top="0.5" height="0.5" color="#3355ff" segments-radial="4" rotation="0 45 0"></a-cone>
+        <!-- 商品（放在藍色碎冰盒上） -->
+        <a-box data-name="現撈大白蝦" data-price="250 / 斤" shop-item position="0 1.1 0.2" width="1.2" height="0.2" depth="0.8" color="#a0c0ff" class="clickable"></a-box>
+        <a-text value="3. 阿港伯現撈海鮮\n大白蝦: $250/斤\n產地直送 乾淨無味" position="-1.2 1.6 0.8" color="#000000" scale="0.6 0.6 0.6"></a-text>
+        <a-plane position="-1.5 1.5 -1" rotation="0 90 0" width="1.5" height="2" color="#fffaf0">
+          <a-text value="【秋分食補】\n蟹肥魚美之時\n海鮮性寒\n料理記得多加老薑與蔥" position="-0.7 0.5 0.01" color="#8b0000" scale="0.4 0.4 0.4"></a-text>
+        </a-plane>
+        <a-cylinder position="0 1 -0.5" radius="0.3" height="1.3" color="#1166aa"></a-cylinder>
+        <a-text value="NPC 阿港伯:\n「鮮魚活蝦看這邊！\n保證有青，沒青免錢！」" position="-1 2.3 -0.5" color="#d11141" scale="0.5 0.5 0.5"></a-text>
+      </a-entity>
+
+
+      <!-- 【攤位 4：傳承手作豆腐攤】(右側 2) -->
+      <a-entity position="4 0 -9">
+        <a-box position="0 0.5 0" width="3" height="1" depth="2" color="#e8e5e1"></a-box>
+        <a-cone position="0 2.5 0" radius-bottom="2" radius-top="0.5" height="0.5" color="#ffbb33" segments-radial="4" rotation="0 45 0"></a-cone>
+        <!-- 商品（傳統板豆腐） -->
+        <a-box data-name="傳統板豆腐" data-price="20 / 塊" shop-item position="0 1.1 0.2" width="0.8" height="0.3" depth="0.6" color="#ffffff" class="clickable"></a-box>
+        <a-text value="4. 傳承手工豆腐\n傳統板豆腐: $20/塊\n純非基改黃豆製作" position="-1.2 1.6 0.8" color="#000000" scale="0.6 0.6 0.6"></a-text>
+        <a-plane position="1.5 1.5 -1" rotation="0 -90 0" width="1.5" height="2" color="#fffaf0">
+          <a-text value="【夏至食補】\n天氣炎熱\n適合吃板豆腐燉涼瓜\n清熱解毒、消暑退火" position="-0.7 0.5 0.01" color="#8b0000" scale="0.4 0.4 0.4"></a-text>
+        </a-plane>
+        <a-cylinder position="0 1 -0.5" radius="0.28" height="1.2" color="#eeeeee"></a-cylinder>
+        <a-text value="NPC 豆腐西施:\n「古法水洗的板豆腐唷\n早上剛出灶的，很有豆香！」" position="-1.2 2.2 -0.5" color="#d11141" scale="0.5 0.5 0.5"></a-text>
+      </a-entity>
+
+
+      <!-- 【攤位 5：金利五金鍋具行】(左側 3) -->
+      <a-entity position="-4 0 -14">
+        <a-box position="0 0.5 0" width="3" height="1" depth="2" color="#999999"></a-box>
+        <a-cone position="0 2.5 0" radius-bottom="2" radius-top="0.5" height="0.5" color="#777777" segments-radial="4" rotation="0 45 0"></a-cone>
+        <!-- 商品（台式大鐵鍋） -->
+        <a-cylinder data-name="台式傳統鑄鐵炒鍋" data-price="550 / 支" shop-item position="0 1.1 0.2" radius="0.4" height="0.1" color="#222222" class="clickable"></a-cylinder>
+        <a-text value="5. 金利五金鍋具\n專業鑄鐵炒鍋: $550/支\n耐操好用、傳熱快" position="-1.2 1.6 0.8" color="#000000" scale="0.6 0.6 0.6"></a-text>
+        <a-plane position="-1.5 1.5 -1" rotation="0 90 0" width="1.5" height="2" color="#fffaf0">
+          <a-text value="【廚房常識】\n好鍋配好食！\n傳統鐵鍋大火爆炒\n最能鎖住蔬菜的時令營養" position="-0.7 0.5 0.01" color="#8b0000" scale="0.4 0.4 0.4"></a-text>
+        </a-plane>
+        <a-cylinder position="0 1 -0.5" radius="0.3" height="1.4" color="#444444"></a-cylinder>
+        <a-text value="NPC 鍋具張伯:\n「這支鐵鍋可以用三十年！\n炒菜保證有鑊氣！」" position="-1 2.3 -0.5" color="#d11141" scale="0.5 0.5 0.5"></a-text>
+      </a-entity>
+
+
+      <!-- 【攤位 6：美美流行服飾】(右側 3) -->
+      <a-entity position="4 0 -14">
+        <a-box position="0 0.5 0" width="3" height="1" depth="2" color="#d9b3cc"></a-box>
+        <a-cone position="0 2.5 0" radius-bottom="2" radius-top="0.5" height="0.5" color="#ff66cc" segments-radial="4" rotation="0 45 0"></a-cone>
+        <!-- 商品（復古花襯衫/圍裙） -->
+        <a-box data-name="阿嬤同款時尚圍裙" data-price="190 / 件" shop-item position="0 1.2 0.2" width="0.2" height="0.6" depth="0.6" color="#ff44aa" class="clickable"></a-box>
+        <a-text value="6. 美美流行服飾\n時尚工作圍裙: $190/件\n防油防水、口袋超大" position="-1.2 1.6 0.8" color="#000000" scale="0.6 0.6 0.6"></a-text>
+        <a-plane position="1.5 1.5 -1" rotation="0 -90 0" width="1.5" height="2" color="#fffaf0">
+          <a-text value="【換季穿搭】\n立冬將至\n市場備有純棉保暖衛生衣\n照顧老人家防風禦寒" position="-0.7 0.5 0.01" color="#8b0000" scale="0.4 0.4 0.4"></a-text>
+        </a-plane>
+        <a-cylinder position="0 1 -0.5" radius="0.25" height="1.3" color="#cc4499"></a-cylinder>
+        <a-text value="NPC 美美姐:\n「帥哥美女來看喔！\n外銷日本的純棉服飾大特價！」" position="-1.2 2.3 -0.5" color="#d11141" scale="0.5 0.5 0.5"></a-text>
+      </a-entity>
+
+
+      <!-- ==================== 玩家控制系統 ==================== -->
+      <!-- 提供電腦 W,A,S,D 移動 + 滑鼠拖拽視角；手機直接觸控畫面即可旋轉與移動 -->
+      <a-entity id="rig" position="0 0 2">
+        <a-camera look-controls wasd-controls="acceleration: 20">
+          <!-- 移動端或點擊用的準心（可有可無，這裡保留滑鼠點擊） -->
+          <a-cursor visible="false"></a-cursor>
+        </a-camera>
+      </a-entity>
+
+    </a-scene>
+  </body>
+</html>
